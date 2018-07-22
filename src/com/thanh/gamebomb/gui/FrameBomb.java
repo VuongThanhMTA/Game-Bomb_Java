@@ -8,6 +8,8 @@ public class FrameBomb extends JFrame implements WindowListener {
     public static final int WIDTH_FRAME = 905;
     public static final int HEIGHT_FRAME = 610;
     private PanelBomb panelBoom;
+    private PanelMenu panelMenu;
+    private Menu menu;
 
 
     public FrameBomb() {
@@ -17,9 +19,10 @@ public class FrameBomb extends JFrame implements WindowListener {
         setResizable(false);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(this);
-        panelBoom = new PanelBomb();
-        add(panelBoom);
-
+        panelMenu=new PanelMenu();
+        add(panelMenu);
+//        panelBoom=new PanelBomb();
+//        add(panelBoom);
         setVisible(true);
 
     }
@@ -34,6 +37,7 @@ public class FrameBomb extends JFrame implements WindowListener {
         int result = JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát không!",
                 "Message", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (result == JOptionPane.YES_OPTION) {
+            PanelBomb.IS_RUNNING = false;
             System.exit(0);
         }
     }

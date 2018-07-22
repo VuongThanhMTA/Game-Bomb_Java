@@ -1,18 +1,26 @@
 package com.thanh.gamebomb.model;
 
+import com.thanh.gamebomb.gui.ButtonMenu;
 import com.thanh.gamebomb.gui.FrameBomb;
+import com.thanh.gamebomb.gui.PanelMenu;
+import sounds.SoundManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class GameManager {
+public class GameManager  {
 
+    private PanelMenu panelMenu;
     private Random random = new Random();
+    private SoundManager soundManager =new SoundManager();
+
 
     private Bomber myBomber;
     private ArrayList<Monster> arrMonster;
@@ -45,6 +53,8 @@ public class GameManager {
         switch (round) {
             case 1:
                 myBomber = new Bomber(300, FrameBomb.HEIGHT_FRAME-90, 7, 1, 3);
+               // soundManager.getSoundBackground().play();
+
                 readMapBomb(round);
                 readMapItem(round);
                 initMonster();
@@ -62,6 +72,8 @@ public class GameManager {
                 break;
         }
     }
+
+
 
     public void draw(Graphics2D g2d) {
 
@@ -161,6 +173,8 @@ public class GameManager {
         }
         Bomb mBom = new Bomb(x, y, myBomber.getSizeBomb(), 2000);
         arrBomb.add(mBom);
+        soundManager.getSoundSetBomb().play();
+        //soundManager.getSoundMonster().play();
     }
 
     private void readMapItem(int round) {
@@ -267,6 +281,7 @@ public class GameManager {
                         .get(i).getY(), arrBomb.get(i).getSize(),arrBox);
                 arrBomBangs.add(bomBang);
                 arrBomb.remove(i);
+                soundManager.getSoundBomBang().play();
             }
         }
 
@@ -288,6 +303,7 @@ public class GameManager {
                 if (arrBomBangs.get(i).isImpactActor(arrMonster.get(j))) {
                     myBomber.setScore(myBomber.getScore() + 1);
                     arrMonster.remove(j);
+                    //soundManager.getSoundMonster().play();
                 }
             }
             if (arrBomBangs.get(i).getTimeLine() == 0) {
@@ -312,6 +328,7 @@ public class GameManager {
     public void eatItem() {
         for (int i = 0; i < arrItem.size(); i++) {
             if (myBomber.isImpactItem(arrItem.get(i))) {
+                soundManager.getSoundItem().play();
                 if (arrItem.get(i).getType() == Item.ITEM_BOMB) {
                     myBomber.setQuantityBomb(myBomber.getQuantityBomb() + 1);
                     arrItem.remove(i);
@@ -328,12 +345,14 @@ public class GameManager {
                     break;
                 }
 
+
             }
         }
     }
 
     public void checkWinAndLose() {
         if (myBomber.getHeart() == 0) {
+            soundManager.getSoundBye().play();
             round = 1;
             status = 1;
         }
@@ -351,6 +370,7 @@ public class GameManager {
     public void checkDie(ArrayList<Monster> arrMonster, ArrayList<BomBang> arrBombBangs) {
         for (int i = 0; i < arrBombBangs.size(); i++) {
             if (arrBombBangs.get(i).isImpactActor(myBomber) && myBomber.getStatus() == Bomber.ALIVE) {
+                soundManager.getSoundBomberDie().play();
                 myBomber.setOrient(4);
                 if (myBomber.getStatus() == Bomber.DEAD) {
                     return;
@@ -361,6 +381,7 @@ public class GameManager {
         }
         for (int i = 0; i < arrMonster.size(); i++) {
             if (myBomber.isImpactMonster(arrMonster.get(i))) {
+                soundManager.getSoundBomberDie().play();
                 myBomber.setOrient(5);
                 if (myBomber.getStatus() == Bomber.DEAD) {
                     return;
@@ -381,7 +402,7 @@ public class GameManager {
         eatItem();
         if (myBomber.status == Actor.DEAD) {
             timeDie++;
-            if (timeDie == 1000) {
+            if (timeDie == 2000) {
                 myBomber.setNew(0, FrameBomb.HEIGHT_FRAME - 100);
                 timeDie = 0;
             }
@@ -405,4 +426,6 @@ public class GameManager {
     public int getStatus() {
         return status;
     }
+
+
 }

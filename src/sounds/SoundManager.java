@@ -8,18 +8,68 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * Created by thiên on 8/17/2016.
+ * Created by T on 8/17/2016.
  */
 public class SoundManager {
-    public static Clip getSound(URL url){
-        try {
-            AudioInputStream inputStream = AudioSystem.getAudioInputStream(url);
-            Clip clip = AudioSystem.getClip();
-            clip.open(inputStream);
-            return clip;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    private SourceEffect soundBackground;
+
+
+    private SourceEffect soundStart;
+    private SourceEffect soundSetBomb;
+    private SourceEffect soundBomBang;
+    private SourceEffect soundMonster;
+    private SourceEffect soundItem;
+    private SourceEffect soundBomberDie;
+    private SourceEffect soundBye;
+    private SourceEffect soundTouch;
+    private SourceEffect soundClick;
+
+
+    public SoundManager() {
+        soundBackground = new SourceEffect("background.wav");
+
     }
+
+    public SourceEffect getSoundClick() {
+        return soundClick = new SourceEffect("click.wav");
+    }
+
+    public SourceEffect getSoundBye() {
+        return soundBye = new SourceEffect("bye_bye.wav");
+    }
+
+    public SourceEffect getSoundTouch() {
+        return soundTouch = new SourceEffect("touch.wav");
+    }
+
+    public SourceEffect getSoundStart() {
+        return soundStart = new SourceEffect("start.wav");
+    }
+
+
+    public SourceEffect getSoundSetBomb() {
+        return soundSetBomb = new SourceEffect("set_boom.wav");
+    }
+
+    public SourceEffect getSoundBomBang() {
+        return soundBomBang = new SourceEffect("boom_bang.wav");
+    }
+
+    public SourceEffect getSoundMonster() {
+        return soundMonster = new SourceEffect("bang_bang.wav");
+    }
+
+    public SourceEffect getSoundItem() {
+        return soundItem = new SourceEffect("item.wav");
+    }
+
+    public SourceEffect getSoundBomberDie() {
+        return soundBomberDie = new SourceEffect("die.wav");
+    }
+
+
+    public SourceEffect getSoundBackground() {
+        return soundBackground;
+    }
+
 }
