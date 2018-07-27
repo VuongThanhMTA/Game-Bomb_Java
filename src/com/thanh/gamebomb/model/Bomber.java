@@ -134,14 +134,4 @@ public class Bomber extends Actor {
         }
         this.sizeBomb = sizeBomb;
     }
-
-//    @Override
-//    public int getWidth() {
-//        return super.getWidth();
-//    }
-//
-//    @Override
-//    public int getHeight() {
-//        return super.getHeight();
-//    }
 }

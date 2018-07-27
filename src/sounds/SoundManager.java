@@ -1,11 +1,5 @@
 package sounds;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.IOException;
-import java.net.URL;
 
 /**
  * Created by T on 8/17/2016.
@@ -46,17 +40,16 @@ public class SoundManager {
         return soundStart = new SourceEffect("start.wav");
     }
 
-
     public SourceEffect getSoundSetBomb() {
         return soundSetBomb = new SourceEffect("set_boom.wav");
     }
 
     public SourceEffect getSoundBomBang() {
-        return soundBomBang = new SourceEffect("boom_bang.wav");
+        return soundBomBang = new SourceEffect("bomb_bang.wav");
     }
 
     public SourceEffect getSoundMonster() {
-        return soundMonster = new SourceEffect("bang_bang.wav");
+        return soundMonster = new SourceEffect("monster_die.wav");
     }
 
     public SourceEffect getSoundItem() {
@@ -64,7 +57,7 @@ public class SoundManager {
     }
 
     public SourceEffect getSoundBomberDie() {
-        return soundBomberDie = new SourceEffect("die.wav");
+        return soundBomberDie = new SourceEffect("bomber_die1.wav");
     }
 
 

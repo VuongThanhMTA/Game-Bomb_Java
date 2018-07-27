@@ -21,10 +21,7 @@ public class FrameBomb extends JFrame implements WindowListener {
         addWindowListener(this);
         panelMenu=new PanelMenu();
         add(panelMenu);
-//        panelBoom=new PanelBomb();
-//        add(panelBoom);
         setVisible(true);
-
     }
 
     @Override
@@ -37,7 +34,7 @@ public class FrameBomb extends JFrame implements WindowListener {
         int result = JOptionPane.showConfirmDialog(null, "Bạn có muốn thoát không!",
                 "Message", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (result == JOptionPane.YES_OPTION) {
-            PanelBomb.IS_RUNNING = false;
+            dispose();
             System.exit(0);
         }
     }

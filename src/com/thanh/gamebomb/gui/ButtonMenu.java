@@ -19,6 +19,11 @@ public class ButtonMenu extends JButton implements MouseListener {
         addMouseListener(this);
     }
 
+    public void setImgIcon(String icon){
+        ImageIcon img = new ImageIcon(getClass().getResource("/images/" + icon));
+        setIcon(img);
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {//click lên
         soundManager.getSoundClick().play();
